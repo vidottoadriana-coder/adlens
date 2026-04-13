@@ -6,36 +6,33 @@ import { Suggestion } from "@/types";
 const MOCK_SUGGESTIONS: Suggestion[] = [
   {
     id: "1",
-    score: 93,
-    plataforma: "meta",
-    formato: "feed",
-    copy: "Seu time de TI não precisa de mais código — precisa de menos gargalo. O Pipefy automatiza aprovações, integrações e workflows sem uma linha de código. ROI em 30 dias.",
+    score: 94,
+    copy: "Seu time de TI não precisa de mais código — precisa de menos gargalo. O Pipefy automatiza aprovações, integrações e workflows sem escrever uma linha. ROI em 30 dias.",
     cta: "Ver demonstração",
+    contextoVisual: "escuro",
     justificativa:
-      "Para líderes de TI, o medo de aumentar a dívida técnica é maior do que o custo da ferramenta. Copies que antecipam essa objeção ('sem código') e entregam um prazo concreto de ROI têm CTR significativamente maior em Feed B2B.",
-    tags: ["sem código", "ROI rápido", "objeção antecipada", "liderança de TI"],
+      "Copy elimina a objeção principal de TI ('mais dívida técnica') antes mesmo de surgir. O prazo concreto de ROI gera urgência sem pressão. Fundo escuro funciona melhor para audiências técnicas em Meta Feed — transmite seriedade e contrasta com conteúdo orgânico claro do feed.",
+    tags: ["sem código", "ROI concreto", "objeção antecipada", "liderança de TI"],
   },
   {
     id: "2",
-    score: 81,
-    plataforma: "google",
-    formato: "search",
-    copy: "Automatize aprovações de AP e reduza o ciclo de pagamento em até 60%. Pipefy conecta ERP, time financeiro e fornecedores em um único workflow — sem planilha, sem e-mail.",
+    score: 82,
+    copy: "Automatize aprovações de AP e reduza o ciclo de pagamento em até 60%. Pipefy conecta ERP, financeiro e fornecedores em um único workflow — sem planilha, sem e-mail.",
     cta: "Calcular meu ROI",
+    contextoVisual: "claro",
     justificativa:
-      "CFOs buscam ativamente por soluções de AP automation no Google. O CTA 'Calcular meu ROI' tem conversão superior a 'Saiba mais' para personas financeiras — transforma clique em intenção de negócio qualificada.",
-    tags: ["AP automation", "CFO", "ROI mensurável", "search de intenção alta"],
+      "Para CFOs, o CTA 'Calcular meu ROI' converte mais que CTAs genéricos — transforma o clique em uma intenção de negócio qualificada. Fundo claro reforça clareza e confiança, atributos valorizados por personas financeiras em Search e Display.",
+    tags: ["AP automation", "CFO", "ROI mensurável", "fundo claro"],
   },
   {
     id: "3",
-    score: 74,
-    plataforma: "ambas",
-    formato: "carrossel",
-    copy: "Onboarding que demora semanas agora leva dias. O Pipefy AI Agent coleta documentos, dispara tarefas e notifica gestores automaticamente — para RH focar no que importa.",
+    score: 71,
+    copy: "Onboarding que levava semanas agora leva dias. O Pipefy AI Agent coleta documentos, dispara tarefas e notifica gestores — automaticamente. Para o RH focar no que importa.",
     cta: "Começar grátis",
+    contextoVisual: "ambos",
     justificativa:
-      "Carrossel funciona bem para mostrar o antes e depois de um processo. Para RH, destacar a eliminação de tarefas manuais (documentos, notificações) com AI Agents gera engajamento alto em audiences de mid-market.",
-    tags: ["AI Agents", "onboarding", "RH", "antes e depois", "mid-market"],
+      "Copy com narrativa de 'antes e depois' funciona bem em carrossel e feed para RH. Testar fundo claro e escuro vale aqui — gestores de RH respondem a variações visuais mais do que CFOs ou líderes de TI, então o A/B pode revelar uma diferença significativa.",
+    tags: ["AI Agents", "onboarding", "RH", "antes e depois", "A/B recomendado"],
   },
 ];
 
@@ -52,9 +49,7 @@ export default function ResultsPage() {
             >
               <span className="text-white text-xs font-black">A</span>
             </div>
-            <span className="text-sm font-bold text-[var(--color-foreground)]">
-              AdLens
-            </span>
+            <span className="text-sm font-bold text-[var(--color-foreground)]">AdLens</span>
           </div>
           <span className="text-[var(--color-border)]">|</span>
           <Link
@@ -70,21 +65,38 @@ export default function ResultsPage() {
       {/* Main */}
       <main className="flex-1 flex flex-col items-center px-6 py-12 sm:py-16">
         <div className="w-full max-w-xl flex flex-col gap-10">
+
           {/* Hero */}
           <div className="flex flex-col gap-3">
             <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-              Resultado da análise
+              Ranking de combinações
             </p>
             <h1 className="text-3xl sm:text-4xl font-black leading-tight">
-              <span className="gradient-text">3 combinações</span>{" "}
-              <span className="text-[var(--color-foreground)]">com maior potencial</span>
+              <span className="gradient-text">{MOCK_SUGGESTIONS.length} combinações</span>{" "}
+              <span className="text-[var(--color-foreground)]">rankeadas por potencial</span>
             </h1>
             <p className="text-sm leading-relaxed text-[var(--color-muted)]">
-              Ordenadas por potencial de performance para o público B2B selecionado. Comece pela #1 no Figma.
+              Cada combinação reúne a melhor copy, CTA e contexto visual para o público selecionado.
+              Comece pela <strong className="text-[var(--color-foreground)]">#1</strong> no Figma.
             </p>
           </div>
 
-          {/* Divider */}
+          {/* Legenda rápida */}
+          <div className="flex items-center gap-6 px-4 py-3 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="text-xs text-[var(--color-muted)]">85–100 Alto potencial</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-amber-400" />
+              <span className="text-xs text-[var(--color-muted)]">70–84 Bom potencial</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-zinc-400" />
+              <span className="text-xs text-[var(--color-muted)]">&lt;70 Médio</span>
+            </div>
+          </div>
+
           <div className="h-px bg-[var(--color-border)]" />
 
           {/* Cards */}
@@ -97,7 +109,7 @@ export default function ResultsPage() {
           {/* CTA bottom */}
           <div className="flex flex-col items-center gap-3 pt-4 border-t border-[var(--color-border)]">
             <p className="text-xs text-[var(--color-muted)] text-center">
-              Quer analisar outro briefing?
+              Quer testar outras combinações?
             </p>
             <Link
               href="/"

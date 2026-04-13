@@ -2,38 +2,23 @@
 
 import { Suggestion } from "@/types";
 
-const platformLabel: Record<string, string> = {
-  meta: "Meta",
-  google: "Google Ads",
-  ambas: "Meta + Google",
+const contextoLabel = {
+  claro: "Fundo claro",
+  escuro: "Fundo escuro",
+  ambos: "Claro + Escuro",
 };
 
-const platformColors: Record<string, string> = {
-  meta: "bg-blue-500/10 text-blue-400 border border-blue-500/20",
-  google: "bg-red-500/10 text-red-400 border border-red-500/20",
-  ambas: "bg-purple-500/10 text-purple-400 border border-purple-500/20",
-};
-
-const platformColorsLight: Record<string, string> = {
-  meta: "bg-blue-50 text-blue-700 border border-blue-200",
-  google: "bg-red-50 text-red-700 border border-red-200",
-  ambas: "bg-purple-50 text-purple-700 border border-purple-200",
-};
-
-const formatLabel: Record<string, string> = {
-  feed: "Feed",
-  stories: "Stories",
-  carrossel: "Carrossel",
-  banner: "Banner",
-  search: "Search",
-  display: "Display",
+const contextoIcon = {
+  claro: "☀",
+  escuro: "◐",
+  ambos: "◑",
 };
 
 function ScoreBar({ score }: { score: number }) {
   const label =
-    score >= 80 ? "Alto potencial" : score >= 60 ? "Potencial médio" : "Potencial baixo";
+    score >= 85 ? "Alto potencial" : score >= 70 ? "Bom potencial" : "Potencial médio";
   const labelColor =
-    score >= 80 ? "text-emerald-400" : score >= 60 ? "text-amber-400" : "text-red-400";
+    score >= 85 ? "text-emerald-400" : score >= 70 ? "text-amber-400" : "text-[var(--color-muted)]";
 
   return (
     <div className="flex flex-col gap-2">
@@ -44,7 +29,7 @@ function ScoreBar({ score }: { score: number }) {
         <span className={`text-xs font-bold ${labelColor}`}>{label}</span>
       </div>
       <div className="flex items-center gap-3">
-        <div className="flex-1 h-1.5 bg-[var(--color-border)] rounded-full overflow-hidden">
+        <div className="flex-1 h-1.5 rounded-full overflow-hidden bg-[var(--color-border)]">
           <div
             className="h-full rounded-full transition-all duration-1000"
             style={{
@@ -53,7 +38,10 @@ function ScoreBar({ score }: { score: number }) {
             }}
           />
         </div>
-        <span className="text-sm font-bold tabular-nums" style={{ color: score >= 80 ? "#10b981" : score >= 60 ? "#f59e0b" : "#f87171" }}>
+        <span
+          className="text-sm font-bold tabular-nums w-7 text-right"
+          style={{ color: score >= 85 ? "#10b981" : score >= 70 ? "#f59e0b" : "var(--color-muted)" }}
+        >
           {score}
         </span>
       </div>
@@ -72,7 +60,7 @@ export default function SuggestionCard({
 
   return (
     <div
-      className={`relative rounded-2xl p-6 flex flex-col gap-5 transition-all duration-200 hover:translate-y-[-2px] ${
+      className={`relative rounded-2xl p-6 flex flex-col gap-5 transition-all duration-200 hover:-translate-y-0.5 ${
         isTop
           ? "gradient-border bg-[var(--color-surface)] shadow-lg"
           : "border border-[var(--color-border)] bg-[var(--color-surface)]"
@@ -87,45 +75,48 @@ export default function SuggestionCard({
         </div>
       )}
 
-      {/* Header */}
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full dark:${platformColors[suggestion.plataforma]} ${platformColorsLight[suggestion.plataforma]}`}>
-            {platformLabel[suggestion.plataforma]}
+      {/* Rank + badges */}
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <span
+            className="text-xs font-bold px-2.5 py-1 rounded-full"
+            style={{ background: "linear-gradient(135deg, #005fff18, #d701b818)", color: "#005fff" }}
+          >
+            #{rank}
           </span>
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[var(--color-border)] text-[var(--color-muted)]">
-            {formatLabel[suggestion.formato]}
+          <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-[var(--color-border)] text-[var(--color-muted)]">
+            {contextoIcon[suggestion.contextoVisual]} {contextoLabel[suggestion.contextoVisual]}
           </span>
         </div>
-        <span className="text-xs font-bold text-[var(--color-muted)] shrink-0 mt-0.5">
-          #{rank}
-        </span>
       </div>
 
       {/* Score */}
       <ScoreBar score={suggestion.score} />
 
-      {/* Copy + CTA */}
-      <div className="flex flex-col gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)] mb-1.5">
-            Copy
-          </p>
-          <p className="text-sm leading-relaxed text-[var(--color-foreground)]">
-            &ldquo;{suggestion.copy}&rdquo;
-          </p>
-        </div>
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)] mb-1.5">
-            CTA
-          </p>
-          <span
-            className="inline-block text-sm font-bold px-4 py-1.5 rounded-full"
-            style={{ background: "linear-gradient(135deg, #005fff22, #d701b822)", color: "#005fff" }}
-          >
-            {suggestion.cta}
-          </span>
-        </div>
+      {/* Copy */}
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)] mb-2">
+          Copy
+        </p>
+        <p className="text-sm leading-relaxed text-[var(--color-foreground)]">
+          &ldquo;{suggestion.copy}&rdquo;
+        </p>
+      </div>
+
+      {/* CTA */}
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)] mb-2">
+          CTA
+        </p>
+        <span
+          className="inline-block text-sm font-bold px-4 py-1.5 rounded-full"
+          style={{
+            background: "linear-gradient(135deg, #005fff18, #d701b818)",
+            color: "#005fff",
+          }}
+        >
+          {suggestion.cta}
+        </span>
       </div>
 
       {/* Justificativa */}
@@ -145,7 +136,7 @@ export default function SuggestionCard({
             key={tag}
             className="text-xs px-2.5 py-1 rounded-full font-medium"
             style={{
-              background: "linear-gradient(135deg, #005fff15, #d701b815)",
+              background: "linear-gradient(135deg, #005fff12, #d701b812)",
               color: "#005fff",
             }}
           >

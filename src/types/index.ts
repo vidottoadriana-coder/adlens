@@ -15,16 +15,19 @@ export type Objective =
   | "leads"
   | "engajamento";
 
+export type VisualContext = "claro" | "escuro" | "ambos";
+
 export type AssetFile = {
   id: string;
   file: File;
-  preview: string | null; // object URL para imagens, null para PDF
+  preview: string | null;
 };
 
 export type Briefing = {
   assets: AssetFile[];
-  copy: string;
-  cta: string;
+  copies: string[];       // mín 2, máx 6
+  ctas: string[];         // mín 2, máx 4
+  contextoVisual: VisualContext;
   objetivo: Objective;
   publicoAlvo: string;
   formato: Format;
@@ -34,10 +37,9 @@ export type Briefing = {
 export type Suggestion = {
   id: string;
   score: number;
-  plataforma: Platform;
-  formato: Format;
   copy: string;
   cta: string;
+  contextoVisual: VisualContext;
   justificativa: string;
   tags: string[];
 };
