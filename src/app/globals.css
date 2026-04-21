@@ -3,18 +3,40 @@
 /* Dark mode via classe .dark no <html> */
 @variant dark (&:is(.dark, .dark *));
 
+/* New Order — coloque os arquivos em /public/fonts/new-order/ */
+@font-face {
+  font-family: "New Order";
+  src: url("/fonts/new-order/new-order-regular.woff2") format("woff2"),
+       url("/fonts/new-order/new-order-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "New Order";
+  src: url("/fonts/new-order/new-order-bold.woff2") format("woff2"),
+       url("/fonts/new-order/new-order-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   /* Pipefy brand colors */
   --color-pipefy-blue: #005fff;
   --color-pipefy-pink: #d701b8;
   --color-pipefy-dark: #101a49;
 
-  /* Semantic tokens */
+  /* Semantic tokens — light mode */
   --color-background: #ffffff;
   --color-surface: #f4f4f6;
   --color-foreground: #101a49;
   --color-muted: #6b7280;
   --color-border: #e5e7eb;
+
+  /* Accent — azul interativo, muda por tema */
+  --color-accent: #005fff;
 
   --font-sans: var(--font-inter);
 }
@@ -26,6 +48,9 @@
   --color-foreground: #f0f4ff;
   --color-muted: #8b9cc8;
   --color-border: rgba(255, 255, 255, 0.1);
+
+  /* Accent mais claro no dark — garante contraste contra bg escuro */
+  --color-accent: #5c9fff;
 }
 
 html {
@@ -38,7 +63,21 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Gradient utilitário */
+/* Botão selecionado usa --color-accent via CSS (adapta ao tema) */
+.btn-accent-active {
+  border-color: var(--color-accent) !important;
+  color: var(--color-accent) !important;
+  background-color: color-mix(in srgb, var(--color-accent) 10%, transparent) !important;
+}
+
+/* Focus rings adaptam ao tema */
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  --tw-ring-color: var(--color-accent);
+}
+
+/* Gradientes */
 .gradient-text {
   background: linear-gradient(135deg, #005fff 0%, #d701b8 100%);
   -webkit-background-clip: text;
@@ -46,8 +85,9 @@ body {
   background-clip: text;
 }
 
+/* Gradiente do botão principal — contraste 4.5:1+ com branco */
 .gradient-bg {
-  background: linear-gradient(135deg, #005fff 0%, #d701b8 100%);
+  background: linear-gradient(135deg, #0044cc 0%, #7c3aed 100%);
 }
 
 .gradient-border {

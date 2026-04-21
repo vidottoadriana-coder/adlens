@@ -28,10 +28,10 @@ export default function Home() {
             <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">
               Análise de Ads
             </p>
-            <h1 className="text-3xl sm:text-4xl font-black leading-tight">
+            <h1 className="text-3xl sm:text-4xl leading-tight font-normal">
               <span className="text-[var(--color-foreground)]">Descubra qual combinação</span>{" "}
-              <span className="gradient-text">vai performar</span>{" "}
-              <span className="text-[var(--color-foreground)]">antes de produzir.</span>
+              <span className="gradient-text font-bold">vai performar</span>{" "}
+              <span className="text-[var(--color-foreground)]">antes de produzir</span>
             </h1>
             <p className="text-sm leading-relaxed text-[var(--color-muted)]">
               Cole o briefing, informe o contexto e receba sugestões de visual + copy + CTA

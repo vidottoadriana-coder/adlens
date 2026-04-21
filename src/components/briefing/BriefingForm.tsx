@@ -77,7 +77,8 @@ function AddButton({ onClick, disabled, children }: { onClick: () => void; disab
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="flex items-center gap-1.5 text-xs font-semibold text-[#005fff] hover:text-[#d701b8] disabled:opacity-30 disabled:cursor-not-allowed transition-colors self-start"
+      className="flex items-center gap-1.5 text-xs font-semibold disabled:opacity-30 disabled:cursor-not-allowed transition-colors self-start"
+      style={{ color: "var(--color-accent)" }}
     >
       <span className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-base leading-none">+</span>
       {children}
@@ -184,7 +185,7 @@ export default function BriefingForm() {
               <div className="flex items-center gap-2 mb-1">
                 <span
                   className="text-xs font-bold px-2 py-0.5 rounded-md"
-                  style={{ background: "linear-gradient(135deg, #005fff22, #d701b822)", color: "#005fff" }}
+                  style={{ background: "linear-gradient(135deg, #005fff22, #d701b822)", color: "var(--color-accent)" }}
                 >
                   Copy {i + 1}
                 </span>
@@ -228,7 +229,7 @@ export default function BriefingForm() {
             <div className="flex-1 flex items-center gap-2">
               <span
                 className="text-xs font-bold px-2 py-0.5 rounded-md shrink-0"
-                style={{ background: "linear-gradient(135deg, #005fff22, #d701b822)", color: "#005fff" }}
+                style={{ background: "linear-gradient(135deg, #005fff22, #d701b822)", color: "var(--color-accent)" }}
               >
                 CTA {i + 1}
               </span>
@@ -266,11 +267,13 @@ export default function BriefingForm() {
               onClick={() => setBriefing((prev) => ({ ...prev, contextoVisual: c.value }))}
               className={`flex flex-col items-center gap-1 py-3 px-2 rounded-xl border text-center transition-all duration-200 ${
                 briefing.contextoVisual === c.value
-                  ? "border-[#005fff] bg-[#005fff]/10"
+                  ? "btn-accent-active"
                   : "border-[var(--color-border)] hover:border-[var(--color-muted)]"
               }`}
             >
-              <span className={`text-sm font-semibold ${briefing.contextoVisual === c.value ? "text-[#005fff]" : "text-[var(--color-foreground)]"}`}>
+              <span className={`text-sm font-semibold ${briefing.contextoVisual === c.value ? "" : "text-[var(--color-foreground)]"}`}
+                style={briefing.contextoVisual === c.value ? { color: "var(--color-accent)" } : {}}
+              >
                 {c.label}
               </span>
               <span className="text-xs text-[var(--color-muted)]">{c.desc}</span>
@@ -353,7 +356,7 @@ export default function BriefingForm() {
               onClick={() => setBriefing((prev) => ({ ...prev, plataforma: p.value }))}
               className={`flex-1 py-3 rounded-xl text-sm font-semibold border transition-all duration-200 ${
                 briefing.plataforma === p.value
-                  ? "border-[#005fff] text-[#005fff] bg-[#005fff]/10"
+                  ? "btn-accent-active"
                   : "border-[var(--color-border)] text-[var(--color-muted)] hover:border-[var(--color-muted)]"
               }`}
             >
@@ -367,7 +370,8 @@ export default function BriefingForm() {
       <button
         type="submit"
         disabled={!isValid || loading}
-        className="w-full gradient-bg rounded-xl py-4 text-sm font-bold text-white hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+        className="w-full rounded-xl py-4 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+        style={{ background: "linear-gradient(135deg, #005fff 0%, #d701b8 100%)" }}
       >
         {loading ? (
           <>

@@ -111,8 +111,8 @@ export default function SuggestionCard({
         <span
           className="inline-block text-sm font-bold px-4 py-1.5 rounded-full"
           style={{
-            background: "linear-gradient(135deg, #005fff18, #d701b818)",
-            color: "#005fff",
+            background: "linear-gradient(135deg, #005fff14, #d701b814)",
+            color: "var(--color-accent)",
           }}
         >
           {suggestion.cta}
@@ -137,7 +137,7 @@ export default function SuggestionCard({
             className="text-xs px-2.5 py-1 rounded-full font-medium"
             style={{
               background: "linear-gradient(135deg, #005fff12, #d701b812)",
-              color: "#005fff",
+              color: "var(--color-accent)",
             }}
           >
             {tag}
